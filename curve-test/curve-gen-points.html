@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VN TEST PAGE FOR BEZIER POINTS</title>
+  <link href="../css/style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5bezier@latest/lib/p5.bezier.min.js"></script>
+  <script>
+    // Bezier (bezierVertex)
+    //x, y points
+    let varray = [35, 1, 34, 5, 35, 5, 40, 3, 41, 28, 40, 30, 35, 42, 30, 41, 26, 55, 24, 63, 22, 80, 20, 80, 18, 79, 15, 77, 15, 76, 15, 73, 12, 73, 12, 70, 12, 69, 11, 67, 11, 67, 11, 67, 9, 66, 8, 60, 8, 56, 11, 53, 11, 50, 11, 43, 12, 40, 19, 35, 32, 26, 34, 13, 32, 3]; // 
+    let font;
+
+    function preload() {
+      font = loadFont('../assets/Fabrica.otf');
+    }
+    function setup() {
+      createCanvas(1200, 800, WEBGL);
+    }
+
+    function draw() {
+      textFont(font);
+      textSize(2);
+
+      background(220);
+
+      //************ EXAMPLE SHAPES FROM SVG / .AI ************//
+      // 1. ORIGINAL SHAPE 1
+      translate(-width / 2, - height / 2);
+
+      stroke('rgba(0,0,0,0)')
+      strokeCap(PROJECT);
+      strokeJoin(MITER);
+      fill("#2550BA") // brown b88265
+      
+      push();
+      beginShape();
+      vertex(32, 3);
+      bezierVertex(35, 1, 34, 5, 35, 5);
+      bezierVertex(40, 3, 41, 28, 40, 30);
+      bezierVertex(35, 42, 30, 41, 26, 55);
+      bezierVertex(24, 63, 22, 80, 20, 80);
+      bezierVertex(18, 79, 15, 77, 15, 76);
+      bezierVertex(15, 73, 12, 73, 12, 70);
+      bezierVertex(12, 69, 11, 67, 11, 67);
+      bezierVertex(11, 67, 9, 66, 8, 60);
+      bezierVertex(8, 56, 11, 53, 11, 50);
+      bezierVertex(11, 43, 12, 40, 19, 35);
+      bezierVertex(32, 26, 34, 13, 32, 3);
+      endShape();
+      pop();
+
+      // Curve vertex simple points not as smooth as bezier
+      push();
+      const blendColor = color(100, 50, 100);
+      fill(blendColor);
+      translate(50, 10);
+      scale(0.5);
+      beginShape();
+      curveVertex(100, 50);
+      curveVertex(100, 50);
+      curveVertex(80, 110); // curve 1 to 2
+      curveVertex(120, 150);  // curve 2 to 3
+      curveVertex(110, 200);  // curve 3 to 4
+      curveVertex(30, 240); // curve 4 to 5
+      curveVertex(70, 170);
+      curveVertex(60, 150);
+      curveVertex(50, 120);
+      curveVertex(40, 100);
+      curveVertex(50, 90);
+      curveVertex(70, 30);
+      curveVertex(90, 30);
+      curveVertex(110, 20);
+      endShape(CLOSE); //
+      pop();
+
+      // 1.B
+      push();
+      translate(150, 10);
+      fill('green'); // blues
+
+      // horizontal shape rotate
+      beginShape();
+      rotate(PI / 5.0);
+      vertex(77, 14);
+      bezierVertex(77.36, 13.71, 74.7, 21.23, 75, 21);
+      bezierVertex(76.09, 23, 62.01, 24.98, 63, 26);
+      bezierVertex(65.45, 28.53, 39.96, 35.93, 39, 36);
+      bezierVertex(26.47, 36.97, 38.07, 37.4, 26.09, 30.39);
+      bezierVertex(22, 28, 10.02, 33.61, 10, 32);
+      bezierVertex(10.01, 30.95, 3., 30.88, 3.96, 30.43);
+      bezierVertex(6.76, 29.32, 5.88, 28, 8, 26.4);
+      bezierVertex(9, 26.09, 10, 24, 10, 24);
+      bezierVertex(10, 24, 11, 23.15, 16, 19.81);
+      bezierVertex(20.05, 17.87, 23.71, 15.69, 27, 14);
+      bezierVertex(32, 11.95, 35.38, 17.14, 42, 20);
+      bezierVertex(53.48, 25.23, 67.61, 19.68, 77, 14);
+      endShape(CLOSE);
+      endShape(CLOSE);
+      pop();
+
+
+      //1.C boomerang
+      push();
+      translate(200, 10);
+      fill('grey'); // blues
+      beginShape();
+      vertex(39.43, 43.88);
+      bezierVertex(38.3, 44.2, 34.69, 44, 33.78, 45.21);
+      bezierVertex(32.53, 46.2, 29, 45.87, 27.5, 45.87);
+      bezierVertex(22.3, 50, 14.86, 49.38, 9.11, 52.82);
+      bezierVertex(6.85, 54.27, 4, 54.02, 3, 51.11);
+      bezierVertex(3, 50.8, 3.8096, 50.266, 3.6495, 50.13);
+      bezierVertex(1.5596, 48, 5.069, 47, 5.76, 45.64);
+      bezierVertex(14.959, 35.3, 26.1, 26.51, 39.516, 23.63);
+      bezierVertex(46.69, 21.07, 53.92, 18.11, 61.37, 16.54);
+      bezierVertex(65.08, 15.569, 80.39, 8.078, 82.55, 10.48);
+      bezierVertex(83.50, 12.63, 83.48, 15, 85.08, 17.32);
+      bezierVertex(88.55, 19.13, 90.78, 22.55, 93.94, 24.79);
+      bezierVertex(97.89, 28.68, 99.83, 34.73, 102.88, 39.44);
+      bezierVertex(107.1, 45.25, 109.99, 51.92, 113.97, 57.94);
+      bezierVertex(118.33, 62.336, 119.34, 68.78, 123.24, 73.53);
+      bezierVertex(126.42, 79, 134.49, 84.7, 123.17, 87);
+      bezierVertex(122.79, 87.02, 122.25, 86.86, 122.04, 86.57);
+      bezierVertex(119.9, 83.41, 115.59, 85.50, 113, 82.02);
+      bezierVertex(107.13, 73.58, 100.51, 71.56, 96, 62);
+      bezierVertex(93.82, 57.39, 89.64, 49.24, 83, 45);
+      bezierVertex(79.91, 42.83, 66.63, 42.87, 65, 39);
+      bezierVertex(59.97, 43.06, 45.8, 40.76, 39.43, 43.88);
+      endShape();
+
+
+      // Change random value test #fail
+      let cr = random(1, 5); 
+      push();
+      translate(150, 10);
+      fill('yellow');
+      beginShape();
+      vertex(20, 0);
+      bezierVertex(32 * cr, 2 * cr, 32 * cr, 2 * cr, 32 * cr, 2* cr);
+      bezierVertex(35 / cr, 1 / cr, 34, 5, 35 - cr, 5 - cr);
+      bezierVertex(40, 3, 41, 28, 40, 30);
+      bezierVertex(35, 42, 30, 44, 26 + cr, 55 + cr);
+      bezierVertex(24, 63, 22, 80, 20, 80);
+      bezierVertex(18, 79, 15, 77, 15, 76);
+      bezierVertex(15, 73, 12, 73, 12, 70);
+      bezierVertex(12, 69.46, 11, 67, 11, 67);
+      bezierVertex(11, 67, 9, 66, 8, 60);
+      bezierVertex(8, 56, 11, 53, 11, 50);
+      bezierVertex(11, 43, 12, 40, 19, 35);
+      bezierVertex(32 + cr, 26 + cr, 34, 13, 20, 0);
+      endShape(CLOSE);
+      pop();
+
+
+      // Complex Shape with grooves
+      push();
+      translate(200, 10);
+      // horizontal
+      //let newc = int(this.colour+random(0,10));
+      fill('brown'); // color(int(random(0,173)), 216, newc)
+      scale(0.4);
+      stroke('rgba(0,0,0,0)')
+      strokeCap(PROJECT);
+      strokeJoin(MITER);
+      beginShape();
+      vertex(141.15, 57.31);
+      bezierVertex(141.94, 58, 143.02, 59.75, 144.72, 60.36);
+      bezierVertex(147.06, 63.3, 153.06, 64.48, 151.16, 69.38);
+      bezierVertex(148.06, 78.28, 145, 86, 141.07, 95);
+      bezierVertex(139.57, 93.24, 139.89, 90.83, 138, 88);
+      bezierVertex(137.518, 91.658, 138.54, 93.938, 139.22, 96.17);
+      bezierVertex(139.92, 102.25, 139.62, 109.27, 136.85, 114.88);
+      bezierVertex(130.328, 131.178, 122.66, 146.967, 118.08, 163.967);
+      bezierVertex(116.88, 168.78, 110.35, 165.506, 106.768, 167.548);
+      bezierVertex(104.648, 168.807, 100.16, 165.458, 100.018, 169.307);
+      bezierVertex(98.10, 194.208, 96.08, 181.057, 91.128, 197.247);
+      bezierVertex(86.468, 206.048, 93.158, 214.747, 91.968, 223.828);
+      bezierVertex(90.13, 231.118, 94.55, 237.79, 94.30, 245.14);
+      bezierVertex(93.91, 248.57, 97.768, 249.78, 97.908, 252.66);
+      bezierVertex(96.908, 260.24, 99.548, 267.157, 107.22, 269.657);
+      bezierVertex(107.72, 272.856, 104.02, 274.555, 104.02, 277.805);
+      bezierVertex(104, 278.01, 103.58, 278.13, 103.11, 278.503);
+      bezierVertex(86.38, 276.166, 89.1, 277.675, 84.22, 262.003);
+      bezierVertex(75.09, 238.564, 73.16, 213.124, 79.07, 188.603);
+      bezierVertex(79.88, 178.663, 86.00, 171.452, 90.83, 163.13);
+      bezierVertex(98.41, 152.163, 106.438, 141.482, 112.468, 129.434);
+      bezierVertex(129.768, 100.634, 139.69, 63.6736, 126.828, 31.514);
+      bezierVertex(130.39, 32.434, 130.828, 25.537, 134.14, 28.874);
+      bezierVertex(139.95, 32.514, 133.89, 39.24, 136.527, 43.714);
+      bezierVertex(137.807, 47.964, 137.566, 53.1645, 140.527, 56.684);
+      bezierVertex(140.65, 56.75, 141.06, 57.12, 141.15, 57.31);
+      endShape();
+      beginShape();
+      vertex(121.4, 31.1);
+      bezierVertex(121.14, 29.6303, 120.961, 28.41, 120.78, 27.18);
+      bezierVertex(126.92, 26.97, 124.65, 34.9, 127.6, 38.44);
+      bezierVertex(129.62, 43.805, 128.94, 49.98, 130.37, 55.594);
+      bezierVertex(133.74, 98.1, 108.12, 134.26, 85.97, 168.06);
+      bezierVertex(76.98, 179.38, 75.77, 194.78, 74.72, 208.8);
+      bezierVertex(71.61, 232.473, 79.89, 252.34, 86.86, 274.29);
+      bezierVertex(82.56, 273.015, 78.52, 270.93, 74.61, 268.584);
+      bezierVertex(72.1, 267.015, 73.64, 263.497, 73.31, 261.04);
+      bezierVertex(74.08, 251.18, 67.89, 242.533, 68.64, 232.68);
+      bezierVertex(68.98, 229.63, 66.48, 230.63, 64.73, 229.5);
+      bezierVertex(63.03, 228.68, 63.53, 227.17, 63.4804, 225.9);
+      bezierVertex(62.9804, 213.702, 67.14, 202, 67.08, 189.86);
+      bezierVertex(69.47, 169.322, 74.17, 146.87, 89.18, 131.77);
+      bezierVertex(115.83, 105.93, 123.58, 67.04, 121.4, 31.1);
+      endShape();
+      beginShape();
+      vertex(72.85, 132.88);
+      bezierVertex(76.91, 132.01, 77.99, 128.91, 77.88, 125.8);
+      bezierVertex(77.66, 119.92, 79.39, 114.59, 81.22, 108.97);
+      bezierVertex(81.28, 107.81, 81.38, 106.88, 81.73, 105.75);
+      bezierVertex(82.9, 102.71, 82.11, 96.48, 87.22, 98.1);
+      bezierVertex(91.14, 99.19, 95.27, 98.75, 99.22, 99.67);
+      bezierVertex(103.48, 99.50, 104.69, 92.91, 103.9, 89.41);
+      bezierVertex(103.321, 86.85, 104.01, 84.53, 105.29, 82.27);
+      bezierVertex(111.68, 72.03, 111.9, 60, 115.54, 48.915);
+      bezierVertex(115.721, 45.24, 111.12, 44.44, 111.93, 39.42);
+      bezierVertex(112.15, 33.32, 107.7, 28.844, 105.661, 23.50);
+      bezierVertex(107.771, 21.84, 110.501, 25.21, 113.071, 24.81);
+      bezierVertex(115.111, 25.10, 116.301, 26.01, 116.42, 28.15);
+      bezierVertex(121.91, 45.44, 118.11, 64.97, 114.571, 82.61);
+      bezierVertex(108.15, 98.72, 102.43, 116.38, 89.53, 128.72);
+      bezierVertex(73.91, 143.38, 67.31, 165.37, 65.2, 186.1);
+      bezierVertex(64.241, 199.64, 61.02, 213.03, 61.13, 226.578);
+      bezierVertex(61.0805, 227.64, 61.5, 229.01, 59.52, 229.14);
+      bezierVertex(56.4804, 227.94, 54.4706, 229.958, 51.59, 229.208);
+      bezierVertex(49.45, 227.82, 49.63, 225.76, 49.49, 223.85);
+      bezierVertex(47.82, 216.027, 50.63, 208.518, 49.8305, 200.75);
+      bezierVertex(46.821, 195.28, 55.6205, 196.22, 54.4104, 190.74);
+      bezierVertex(50.81, 175.452, 62.071, 180.88, 58.74, 170.55);
+      bezierVertex(57.57, 166.68, 53.86, 151.8, 60.93, 152.88);
+      bezierVertex(63.6, 153.68, 64.35, 152.35, 64.64, 150.25);
+      bezierVertex(66.09, 144.1, 68.4, 137.32, 72.85, 132.88);
+      endShape();
+      beginShape();
+      vertex(131.25, 156.54);
+      bezierVertex(128.72, 161.28, 126.01, 168.64, 119.45, 166.98);
+      bezierVertex(118.66, 166.7, 118.67, 166.118, 118.9, 165.48);
+      bezierVertex(124.241, 147.47, 132.57, 130.54, 139.51, 113.13);
+      bezierVertex(140.45, 113.39, 140.48, 113.85, 140.488, 114.24);
+      bezierVertex(141.027, 122.63, 140.79, 130.99, 139.64, 139.328);
+      bezierVertex(139.46, 146.45, 132.97, 149.92, 131.25, 156.54);
+      endShape();
+      pop();
+
+
+      //************ TEST SHAPES POINTS ************//
+
+      // 2. POINTS SHAPE TEST
+      push();
+      scale(5);
+      translate(10, 30);
+      ctr3 = 1;
+      pctr = 1;
+
+      fill("green");
+
+      // Draw circle points from array add numbers and colours for Control point(orange) and bezier curve Anchor point
+      beginShape();
+      vertex(32, 3);
+      for (let i = 0; i < varray.length; i += 2) {
+        ellipse(varray[i], varray[i + 1], 1, 1);
+        fill('black');
+        text(pctr, varray[i], varray[i + 1]);
+        pctr++;
+        if (ctr3 != "3") {  // CP
+          ctr3++;
+          fill("orange");
+        } else { // AP
+          ctr3 = 1;
+          fill('yellow');
+        }
+      }
+      endShape();
+      pop();
+
+
+      // 4. DRAW SHAPE FROM ARRAY LOOP POINTS 
+      push();
+      scale(5);
+      translate(50, 30);
+      fill('purple');
+      beginShape();
+      vertex(32, 3);
+      // Draw shape with array points
+      // Each vertex has 6 numbers for 3 points so skip every 6 in array
+      for (let i = 0; i < varray.length; i += 6) {
+        bezierVertex( // cx1, cy1, cx2, cy2, ax3, ay3
+          varray[i + 0],
+          varray[i + 1],
+          varray[i + 2],
+          varray[i + 3],
+          varray[i + 4],
+          varray[i + 5]
+        );
+        //console.log(varray[i], varray[i + 1], varray[i + 2], varray[i + 3], varray[i + 4], varray[i + 5]);
+      }
+      endShape();
+      pop();
+
+
+      // XXX FIND A WAY TO RANDOMISE THIS NICELY
+      // 5. ARRAY LOOP POINTS SHAPE MODIFY USING SOME RANDOM VARIABLES
+      let pr; // random point
+      push();
+      scale(5);
+      translate(80, 30);
+      fill('pink');
+      beginShape();
+      vertex(32, 3);
+      // Draw shape with array points
+      // Each vertex has 6 numbers for 3 points so skip every 6 in array
+      /* TESTS 
+      * 1.5 makes it jagged
+      + 2.5 only small increments so nearly the same
+      */
+      for (let i = 0; i < varray.length; i += 6) {
+        pr = random (1 ,20);
+        bezierVertex( // cx1, cy1, cx2, cy2, ax3, ay3
+          varray[i + 0] + pr,
+          varray[i + 1] + pr,
+          varray[i + 2] + pr * (i/100),
+          varray[i + 3] + pr * (i/100),
+          varray[i + 4] + pr - (i/50),
+          varray[i + 5] + pr - (i/50)
+        );
+        //console.log(varray[i], varray[i + 1], varray[i + 2], varray[i + 3], varray[i + 4], varray[i + 5]);
+      }
+      endShape();
+      pop();
+
+
+      /* JAKE CODE */
+      push();
+      scale(5);
+      translate(150, 30);
+      fill('black');
+      beginShape();
+      vertex(0, 0);
+      for (i = 0; i < 10; i++) {
+        x = random(0, 360);
+        y = random(0, 360);
+        bezierVertex(x, y,
+          random(x - 20, x + 20), random(y - 20, y + 20),
+          random(x - 20, x + 20), random(y - 20, y + 20));
+      }
+      endShape(CLOSE);
+      pop();
+
+
+      noLoop();
+    }
+
+  </script>
+</head>
+
+<body>
+  <!-- VN TEST PAGE FOR BEZIER POINTS -->
+  <div id="myContainer"></div>
+</body>
+
+</html>
